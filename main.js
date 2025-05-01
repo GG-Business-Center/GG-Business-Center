@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <h3>${product.name}</h3>
                         <p>${product.description}</p>
                         <p class="price">${product.price}</p>
-                        <a href="https://wa.me/22667472504?text=Bonjour,%20je%20souhaite%20commander%20le%20produit:%20${encodeURIComponent(product.name)}" 
+                        <a href="https://wa.me/22675579942?text=Bonjour,%20je%20souhaite%20commander%20le%20produit:%20${encodeURIComponent(product.name)}" 
                            target="_blank" 
                            class="whatsapp-link">
                            Commander via WhatsApp
