@@ -1,85 +1,527 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta name="google-site-verification" content="V-s62qo8TxLnWeZt5UABSI0V2eYEn2GqYhkM3JbX6VQ" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GG Business Center</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <script defer src="main.js"></script>
-    <script defer src="categories.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Always Innovation — Soutenance, Mode, Event, Formation et Design. Art et innovation à l'image.">
+<title>Always Innovation — Art et innovation à l'image</title>
+
+<style>
+:root{
+  --navy:#061735;
+  --navy2:#0b2756;
+  --blue:#0d5bd7;
+  --gold:#c99636;
+  --gold2:#e7b85a;
+  --cream:#fbfaf7;
+  --white:#fff;
+  --text:#10203b;
+  --muted:#6b778c;
+  --line:rgba(6,23,53,.10);
+  --shadow:0 25px 70px rgba(6,23,53,.12);
+  --radius:26px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);background:var(--white);line-height:1.6;overflow-x:hidden
+}
+a{text-decoration:none;color:inherit}
+button{font:inherit}
+.container{width:min(1160px,92%);margin:auto}
+.gold{color:var(--gold)}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--gold);font-size:.73rem;font-weight:900;
+  letter-spacing:.18em;text-transform:uppercase
+}
+.eyebrow:before{content:"";width:28px;height:1px;background:currentColor}
+h1,h2,h3{line-height:1.05;letter-spacing:-.035em}
+h2{font-size:clamp(2.2rem,5vw,4.2rem)}
+p{color:var(--muted)}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:14px 21px;border-radius:999px;font-weight:850;
+  transition:.28s;border:1px solid transparent
+}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:0 14px 35px rgba(6,23,53,.2)}
+.btn-primary:hover{transform:translateY(-3px);background:var(--blue)}
+.btn-light{background:#fff;border-color:var(--line)}
+.btn-light:hover{transform:translateY(-3px);border-color:var(--gold)}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{transform:translateY(-3px);background:#ad7e26}
+
+/* NAV */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:.35s}
+header.scrolled{background:rgba(255,255,255,.9);backdrop-filter:blur(18px);box-shadow:0 8px 35px rgba(0,0,0,.07)}
+nav{height:82px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-size:.82rem;font-weight:950;line-height:1.05}
+.brand img{width:54px;height:54px;object-fit:contain}
+.brand small{font-size:.62rem;color:var(--gold);letter-spacing:.08em}
+.navlinks{display:flex;align-items:center;gap:27px;font-size:.88rem;font-weight:750}
+.navlinks a:not(.nav-cta){position:relative}
+.navlinks a:not(.nav-cta):after{content:"";position:absolute;bottom:-7px;left:0;width:0;height:2px;background:var(--gold);transition:.25s}
+.navlinks a:hover:after{width:100%}
+.nav-cta{background:var(--navy);color:#fff;border-radius:999px;padding:11px 17px}
+.nav-cta:hover{background:var(--blue)}
+.menu{display:none;border:0;background:transparent;font-size:1.6rem;color:var(--navy)}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:grid;align-items:center;position:relative;overflow:hidden;
+  padding:125px 0 80px;
+  background:
+    radial-gradient(circle at 82% 22%,rgba(13,91,215,.15),transparent 28%),
+    radial-gradient(circle at 15% 85%,rgba(201,150,54,.12),transparent 27%),
+    linear-gradient(135deg,#fff 0%,#f5f8fd 100%);
+}
+.hero:before{
+  content:"";position:absolute;width:700px;height:700px;border-radius:50%;
+  border:1px solid rgba(13,91,215,.09);right:-300px;top:-230px
+}
+.hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:65px;align-items:center;position:relative;z-index:2}
+.hero h1{font-size:clamp(3.3rem,7vw,6.8rem);margin:20px 0 25px}
+.hero h1 span{display:block;color:var(--blue)}
+.hero-lead{max-width:590px;font-size:1.06rem}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero-visual{position:relative;min-height:520px;display:grid;place-items:center}
+.logo-orbit{
+  width:min(430px,82vw);aspect-ratio:1;border-radius:50%;
+  background:linear-gradient(145deg,#061735,#0d5bd7);
+  box-shadow:0 35px 85px rgba(6,23,53,.24);
+  display:grid;place-items:center;position:relative;
+  animation:levitate 5s ease-in-out infinite
+}
+.logo-orbit:before,.logo-orbit:after{
+  content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.25)
+}
+.logo-orbit:before{inset:22px}.logo-orbit:after{inset:50px;border-color:rgba(231,184,90,.35)}
+.logo-orbit img{width:70%;aspect-ratio:1;object-fit:cover;border-radius:50%;clip-path:circle(50%);filter:drop-shadow(0 18px 25px rgba(0,0,0,.28))}
+.pill{
+  position:absolute;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.8);box-shadow:var(--shadow);
+  border-radius:17px;padding:13px 17px;font-size:.8rem;font-weight:850
+}
+.pill.one{top:9%;left:2%}.pill.two{right:0;top:25%}.pill.three{left:8%;bottom:8%}
+@keyframes levitate{50%{transform:translateY(-12px)}}
+
+/* COMMON */
+section{padding:105px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:48px}
+.section-head p{max-width:470px}
+
+/* INTRO */
+.intro{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+.intro:after{
+  content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;right:-180px;top:-230px
+}
+.intro-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:70px;position:relative;z-index:2}
+.intro h2{margin-top:16px}
+.intro p{color:rgba(255,255,255,.68)}
+.statement{
+  border-left:2px solid var(--gold);padding-left:23px;
+  font-size:1.35rem;font-weight:800;color:#fff
+}
+
+/* SERVICES */
+.services{background:var(--cream)}
+.service-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:13px}
+.service{
+  min-height:315px;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:25px;display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;overflow:hidden;transition:.3s;cursor:pointer
+}
+
+.service-visual{
+  height:118px;margin:19px 0 18px;border-radius:18px;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,rgba(6,23,53,.96),rgba(13,91,215,.72));
+}
+.service-visual:after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.16);border-radius:18px;pointer-events:none}
+.service-visual img{width:100%;height:100%;display:block;object-fit:cover;transition:.45s ease}
+.service:hover .service-visual img{transform:scale(1.06)}
+.service .arrow{transition:.25s}
+.service:hover .arrow{transform:translate(3px,-3px)}
+
+.service:before{
+  content:"";position:absolute;width:145px;height:145px;border-radius:50%;
+  right:-65px;bottom:-70px;background:rgba(13,91,215,.07);transition:.35s
+}
+.service:hover{transform:translateY(-9px);box-shadow:var(--shadow);border-color:transparent}
+.service:hover:before{transform:scale(1.7)}
+.number{font-size:.7rem;font-weight:950;color:var(--gold);letter-spacing:.12em}
+.icon{
+  width:56px;height:56px;border-radius:17px;margin:24px 0 18px;
+  display:grid;place-items:center;background:var(--navy);color:#fff;font-size:1.5rem
+}
+.service h3{font-size:1.35rem;margin-bottom:9px}
+.service p{font-size:.83rem}
+.service .arrow{align-self:flex-end;color:var(--blue);font-size:1.3rem}
+
+/* DETAILS */
+.details{background:#fff}
+.detail-list{display:grid;gap:14px}
+.detail{
+  border:1px solid var(--line);border-radius:22px;background:#fff;
+  overflow:hidden;transition:.3s
+}
+.detail:hover{box-shadow:var(--shadow)}
+.detail summary{
+  list-style:none;cursor:pointer;padding:23px 25px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  font-weight:900;font-size:1.08rem
+}
+.detail summary::-webkit-details-marker{display:none}
+.detail summary span:last-child{font-size:1.4rem;color:var(--gold);transition:.25s}
+.detail[open] summary span:last-child{transform:rotate(45deg)}
+.detail-body{padding:0 25px 25px}
+.tags{display:flex;flex-wrap:wrap;gap:9px}
+.tag{
+  padding:9px 12px;border-radius:999px;background:#f3f6fb;
+  font-size:.79rem;font-weight:750;color:var(--navy)
+}
+.detail-body .service-contact{margin-top:20px}
+
+/* CTA */
+.cta{padding:80px 0}
+.cta-box{
+  border-radius:32px;padding:55px;
+  background:linear-gradient(135deg,#061735,#0b2756);
+  color:#fff;display:flex;align-items:center;justify-content:space-between;gap:35px;
+  box-shadow:0 30px 80px rgba(6,23,53,.18);position:relative;overflow:hidden
+}
+.cta-box:after{content:"AI";position:absolute;right:30px;bottom:-80px;font-size:18rem;font-weight:950;color:rgba(255,255,255,.025)}
+.cta-box h2{position:relative;z-index:2}
+.cta-box .actions{position:relative;z-index:3;flex-shrink:0}
+
+/* FOOTER */
+footer{background:#030d20;color:#fff;padding:45px 0}
+.footer-grid{display:flex;justify-content:space-between;align-items:center;gap:30px}
+.footer-brand{display:flex;align-items:center;gap:12px;font-weight:900}
+.footer-brand img{width:58px;height:58px;object-fit:contain}
+footer p{font-size:.82rem;color:rgba(255,255,255,.52)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(25px);transition:.7s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* RESPONSIVE */
+@media(max-width:1020px){
+  .navlinks{position:absolute;top:78px;left:4%;right:4%;background:#fff;border-radius:20px;
+    padding:18px;box-shadow:var(--shadow);display:none;flex-direction:column;align-items:stretch}
+  .navlinks.open{display:flex}
+  .menu{display:block}
+  .hero-grid,.intro-grid{grid-template-columns:1fr}
+  .hero-visual{min-height:420px}
+  .service-grid{grid-template-columns:repeat(2,1fr)}
+  .service:last-child{grid-column:1/-1}
+  .cta-box{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:620px){
+  section{padding:75px 0}
+  .hero h1{font-size:3.25rem}
+  .hero-visual{min-height:340px}
+  .logo-orbit{width:300px}
+  .pill{font-size:.68rem;padding:9px 11px}
+  .section-head{display:block}
+  .section-head p{margin-top:15px}
+  .service-grid{grid-template-columns:1fr}
+  .service:last-child{grid-column:auto}
+  .cta-box{padding:35px 25px}
+  .footer-grid{flex-direction:column;align-items:flex-start}
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <div class="logo">
-            <h1>GG Business Center</h1>
+
+<header id="header">
+  <div class="container">
+    <nav>
+      <a href="#accueil" class="brand">
+        <img src="logo.jpg" alt="Logo Always Innovation">
+        <div>ALWAYS<br><span class="gold">INNOVATION</span><br><small>ART ET INNOVATION À L'IMAGE</small></div>
+      </a>
+
+      <button class="menu" id="menu" aria-label="Menu">☰</button>
+
+      <div class="navlinks" id="navlinks">
+        <a href="#accueil">Accueil</a>
+        <a href="#expertises">Expertises</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" target="_blank" rel="noopener"
+           href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20en%20savoir%20plus%20sur%20vos%20services.">
+           WhatsApp ↗
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero" id="accueil">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">Art et innovation à l'image</div>
+      <h1>Créer.<br><span>Révéler.</span><br>Accompagner.</h1>
+      <p class="hero-lead">
+        Always Innovation rassemble cinq expertises complémentaires pour accompagner
+        les projets, révéler les talents et donner vie aux idées.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#services">Découvrir nos services ↓</a>
+        <a class="btn btn-light" target="_blank" rel="noopener"
+           href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20viens%20depuis%20votre%20site.">
+           Nous contacter sur WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="logo-orbit">
+        <img src="logo.jpg" alt="Always Innovation">
+      </div>
+      <div class="pill one">01 — Soutenance</div>
+      <div class="pill two">05 — Design</div>
+      <div class="pill three">5 pôles · 1 vision</div>
+    </div>
+  </div>
+</section>
+
+<section class="intro" id="expertises">
+  <div class="container intro-grid">
+    <div class="reveal">
+      <div class="eyebrow">Notre univers</div>
+      <h2>Une identité.<br><span class="gold">Cinq expertises.</span><br>Une même vision.</h2>
+    </div>
+    <div class="reveal">
+      <p class="statement">
+        Créer de la valeur, révéler les talents et accompagner chaque projet avec excellence.
+      </p>
+      <p style="margin-top:20px">
+        Les activités d'Always Innovation s'articulent autour de cinq pôles :
+        Soutenance, Mode, Event, Formation et Design.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Nos 5 pôles d'expertise</div>
+        <h2>Choisissez votre<br>univers.</h2>
+      </div>
+      <p>
+        Des services distincts, réunis dans une même structure, avec une approche
+        fondée sur la créativité, le professionnalisme, l'innovation et l'excellence.
+      </p>
+    </div>
+
+    <div class="service-grid">
+
+      <a class="service reveal" href="#detail-soutenance" aria-label="Découvrir Always Soutenance">
+        <div><span class="number">01</span><div class="service-visual"><img src="soutenance.jpg" alt="Always Soutenance"></div><h3>Always Soutenance</h3><p>Accompagner la réussite académique et aider les étudiants à présenter leurs travaux avec clarté et impact.</p></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="service reveal" href="#detail-mode" aria-label="Découvrir Always Mode">
+        <div><span class="number">02</span><div class="service-visual"><img src="mode.jpg" alt="Always Mode"></div><h3>Always Mode</h3><p>Révéler les talents et valoriser l'image dans l'univers du mannequinat, de la mode et de l'image.</p></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="service reveal" href="#detail-event" aria-label="Découvrir Always Event">
+        <div><span class="number">03</span><div class="service-visual"><img src="event.jpg" alt="Always Event"></div><h3>Always Event</h3><p>Créer des moments uniques et mémorables, de l'organisation à la réalisation et à la coordination.</p></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="service reveal" href="#detail-formation" aria-label="Découvrir Always Formation">
+        <div><span class="number">04</span><div class="service-visual"><img src="formation.jpg" alt="Always Formation"></div><h3>Always Formation</h3><p>Développer les compétences et les potentiels grâce à des formations, ateliers pratiques et accompagnements.</p></div>
+        <span class="arrow">↗</span>
+      </a>
+
+      <a class="service reveal" href="#detail-design" aria-label="Découvrir Always Design">
+        <div><span class="number">05</span><div class="service-visual"><img src="design.jpg" alt="Always Design"></div><h3>Always Design</h3><p>Donner vie aux idées et aux identités grâce au design graphique, digital et à la valorisation de l'image.</p></div>
+        <span class="arrow">↗</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="details">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow">Les services en détail</div>
+        <h2>Ce que nous<br>pouvons faire.</h2>
+      </div>
+      <p>Ouvrez un pôle pour découvrir les domaines concernés et contactez directement Always Innovation pour votre besoin.</p>
+    </div>
+
+    <div class="detail-list">
+
+      <details class="detail reveal" id="detail-soutenance">
+        <summary><span>🎓 Always Soutenance</span><span>+</span></summary>
+        <div class="detail-body">
+          <div class="tags">
+            <span class="tag">Correction & rédaction</span>
+            <span class="tag">Mise en page professionnelle</span>
+            <span class="tag">Préparation de soutenance</span>
+            <span class="tag">Supports de présentation</span>
+            <span class="tag">Accompagnement personnalisé</span>
+          </div>
+          <a class="btn btn-gold service-contact" target="_blank" rel="noopener"
+             href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20un%20service%20Always%20Soutenance.">
+             Demander ce service sur WhatsApp ↗
+          </a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#produits">Produits</a></li>
-                <li><a href="#a-propos">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+      </details>
 
-    <main>
-        <section id="accueil" class="hero">
-            <h1>Bienvenue chez GG BUSINESS CENTER 🎉✨</h1>
-            <p> 👉 Promotions 🔥 | Livraisons 🚚 rapides, fiables et sur mesure !
-                🎯 Boostez vos projets, simplifiez vos commandes, et laissez-nous faire le reste.
-                
-                Passez commande maintenant ! 🚀💼</p>
-            <a href="#produits" class="cta-button">Découvrez nos produits</a>
-        </section>
+      <details class="detail reveal" id="detail-mode">
+        <summary><span>✦ Always Mode</span><span>+</span></summary>
+        <div class="detail-body">
+          <div class="tags">
+            <span class="tag">Mannequinat & shootings</span>
+            <span class="tag">Défilés & présentations</span>
+            <span class="tag">Conseil en image & stylisme</span>
+            <span class="tag">Valorisation des talents</span>
+            <span class="tag">Projets mode & créatifs</span>
+          </div>
+          <a class="btn btn-gold service-contact" target="_blank" rel="noopener"
+             href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20un%20service%20Always%20Mode.">
+             Demander ce service sur WhatsApp ↗
+          </a>
+        </div>
+      </details>
 
-        <!-- Produits classés par catégories -->
-        <section id="produits">
-            <h2>Nos Produits</h2>
-            <nav class="categories">
-                <a href="#" class="category" data-category="categorie1">Casques et Bleutooth (JBL)</a>
-                <a href="#" class="category" data-category="categorie2">Ecouteur filaires et Incassables</a>
-                <a href="#" class="category" data-category="categorie3">Power Bank</a>
-                <a href="#" class="category" data-category="categorie4">Installations solaires</a>
-                <a href="#" class="category" data-category="categorie5">Chargeurs et cables</a>
-                <a href="#" class="category" data-category="categorie6">Lampes et Boomeur</a>
-                <a href="#" class="category" data-category="categorie7">Telephones androïd</a>
-            </nav>
+      <details class="detail reveal" id="detail-event">
+        <summary><span>◉ Always Event</span><span>+</span></summary>
+        <div class="detail-body">
+          <div class="tags">
+            <span class="tag">Anniversaires</span>
+            <span class="tag">Surprises & célébrations</span>
+            <span class="tag">Événements privés & professionnels</span>
+            <span class="tag">Cérémonies & lancements</span>
+            <span class="tag">Logistique & coordination</span>
+          </div>
+          <a class="btn btn-gold service-contact" target="_blank" rel="noopener"
+             href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20un%20service%20Always%20Event.">
+             Demander ce service sur WhatsApp ↗
+          </a>
+        </div>
+      </details>
 
-            <div class="product-list">
-                <!-- Les produits seront affichés dynamiquement ici -->
-            </div>
-        </section>
+      <details class="detail reveal" id="detail-formation">
+        <summary><span>▣ Always Formation</span><span>+</span></summary>
+        <div class="detail-body">
+          <div class="tags">
+            <span class="tag">Formations professionnelles</span>
+            <span class="tag">Ateliers pratiques</span>
+            <span class="tag">Développement personnel</span>
+            <span class="tag">Soft skills & communication</span>
+            <span class="tag">Accompagnement & coaching</span>
+          </div>
+          <a class="btn btn-gold service-contact" target="_blank" rel="noopener"
+             href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20un%20service%20Always%20Formation.">
+             Demander ce service sur WhatsApp ↗
+          </a>
+        </div>
+      </details>
 
-        <section id="a-propos">
-            <h2>À propos</h2>
-            <p>Bienvenue chez GG BUSINESS CENTER 🌟
+      <details class="detail reveal" id="detail-design">
+        <summary><span>⌁ Always Design</span><span>+</span></summary>
+        <div class="detail-body">
+          <div class="tags">
+            <span class="tag">Identité visuelle — logos, chartes</span>
+            <span class="tag">Affiches & supports de communication</span>
+            <span class="tag">Design digital — réseaux sociaux, visuels</span>
+            <span class="tag">Montage & retouche photo</span>
+            <span class="tag">Accompagnement de l'image</span>
+          </div>
+          <a class="btn btn-gold service-contact" target="_blank" rel="noopener"
+             href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20un%20service%20Always%20Design.">
+             Demander ce service sur WhatsApp ↗
+          </a>
+        </div>
+      </details>
 
-                Votre partenaire de confiance pour promotion et livraison de tout genre. Nous allions expertise et efficacité pour vous accompagner dans vos projets logistiques et marketing.
-                
-                Nos services :
-                    1.	Promotion ciblée : Maximisez votre visibilité avec des stratégies adaptées à vos produits, services ou événements.📈
-                    2.	Livraison rapide et sécurisée : Qu’il s’agisse de petits colis ou de marchandises volumineuses, nous garantissons une logistique fiable et ponctuelle.🚚
-                
-                Pourquoi choisir GG BUSINESS CENTER ?
-                    •	Solutions personnalisées : Des services conçus sur mesure pour vos besoins.🎯
-                    •	Fiabilité absolue : Livraison rapide et sans encombre.⏱️
-                    •	Polyvalence : Adaptation à tout secteur et projet.🔄
-                
-                Avec GG BUSINESS CENTER, bénéficiez d’un service de qualité pour simplifier vos opérations et booster vos performances. Faites-nous confiance pour des résultats à la hauteur de vos attentes. 🤝</p>
-            <p>Informations sur l'entreprise et ses valeurs.</p>
-        </section>
+    </div>
+  </div>
+</section>
 
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Comment nous joindre : ggbusinesscenter8@gmail.com,+22675579942; +22667472504, Livraison gratuite partout à Bobo-Dioulasso.</p>
-        </section>
-    </main>
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div>
+        <div class="eyebrow">Always Innovation</div>
+        <h2 style="margin-top:15px">Vous avez un besoin ?<br><span class="gold">Parlons-en.</span></h2>
+      </div>
+      <div class="actions">
+        <a class="btn btn-gold" target="_blank" rel="noopener"
+           href="https://wa.me/22658203420?text=Bonjour%20Always%20Innovation%2C%20je%20souhaite%20%C3%A9changer%20sur%20un%20de%20vos%20services.">
+           Contacter Always sur WhatsApp ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        <p>&copy; 2024 GG Business Center. Tous droits réservés.</p>
-    </footer>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img src="logo.jpg" alt="Always Innovation">
+      <div>ALWAYS INNOVATION<br><span class="gold">Art et innovation à l'image</span></div>
+    </div>
+    <div>
+      <p>WhatsApp : +226 58 20 34 20</p>
+      <p>© <span id="year"></span> Always Innovation — Tous droits réservés.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const header=document.getElementById('header');
+const menu=document.getElementById('menu');
+const nav=document.getElementById('navlinks');
+
+window.addEventListener('scroll',()=>{
+  header.classList.toggle('scrolled',window.scrollY>30);
+});
+
+menu.addEventListener('click',()=>nav.classList.toggle('open'));
+
+
+document.querySelectorAll('.service[href^="#detail-"]').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const target=document.querySelector(card.getAttribute('href'));
+    if(target) target.open=true;
+  });
+});
+
+document.querySelectorAll('.navlinks a').forEach(a=>{
+  a.addEventListener('click',()=>nav.classList.remove('open'));
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:.12});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+
 </body>
 </html>
